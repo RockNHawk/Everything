@@ -84,9 +84,12 @@ namespace QueryEngine
         private static List<FrnFilePath> GetFolderPath(UsnEntry[] folders, DriveInfo drive)
         {
             Dictionary<UInt64, FrnFilePath> pathDic = new Dictionary<ulong, FrnFilePath>();
+
+            // 跟路径，即磁盘跟路径（C:,D:）
             pathDic.Add(ROOT_FILE_REFERENCE_NUMBER,
                 new FrnFilePath(ROOT_FILE_REFERENCE_NUMBER, null, string.Empty, drive.Name));
 
+            // 这里 FrnFilePath 仅仅是复制一下数据
             foreach (var folder in folders)
             {
                 pathDic.Add(folder.FileReferenceNumber,
@@ -103,12 +106,17 @@ namespace QueryEngine
 
                 if (string.IsNullOrWhiteSpace(currentValue.Path)
                     && currentValue.ParentFileReferenceNumber.HasValue
+
+                    // 如果此文件夹的父级存在于列表中
                     && pathDic.ContainsKey(currentValue.ParentFileReferenceNumber.Value))
                 {
                     FrnFilePath parentValue = pathDic[currentValue.ParentFileReferenceNumber.Value];
-
+                     
+                    // 递归将父级文件夹加入到 treeWalkStack 中，方便下一步填充他们的路径
                     while (string.IsNullOrWhiteSpace(parentValue.Path)
                         && parentValue.ParentFileReferenceNumber.HasValue
+
+                        // 如果父级文件夹的父级存在于列表中
                         && pathDic.ContainsKey(parentValue.ParentFileReferenceNumber.Value))
                     {
                         var temp = currentValue;
@@ -131,6 +139,8 @@ namespace QueryEngine
                     {
                         currentValue.Path = BuildPath(currentValue, parentValue);
 
+                        // 循环 treeWalkStack （不同意普通列表，treeWalkStack 是先进的后出，从最父级到子级）
+                        // 这里可以优化，把 路径的获取放到前面的循环去，同时去除 treeWalkStack？
                         while (treeWalkStack.Count() > 0)
                         {
                             UInt64 walkedKey = treeWalkStack.Pop();
@@ -138,6 +148,7 @@ namespace QueryEngine
                             FrnFilePath walkedNode = pathDic[walkedKey];
                             FrnFilePath parentNode = pathDic[walkedNode.ParentFileReferenceNumber.Value];
 
+                            // 这里的 Path 是一直累加的，先把父级的路径填充，然后把父级的子级填充，这样逐级填充
                             walkedNode.Path = BuildPath(walkedNode, parentNode);
                         }
                     }
