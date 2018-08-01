@@ -52,6 +52,15 @@
     <Compile Include="UsnOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsnReasonCode.cs" />
+    <Compile Include="Win32\Constants\Win32ApiConstant.cs" />
+    <Compile Include="Win32\Structures\BY_HANDLE_FILE_INFORMATION.cs" />
+    <Compile Include="Win32\Structures\CREATE_USN_JOURNAL_DATA.cs" />
+    <Compile Include="Win32\Structures\MFT_ENUM_DATA.cs" />
+    <Compile Include="Win32\Structures\POINT.cs" />
+    <Compile Include="Win32\Structures\READ_USN_JOURNAL_DATA.cs" />
+    <Compile Include="Win32\Structures\USN_JOURNAL_DATA.cs" />
+    <Compile Include="Win32\Structures\USN_RECORD_V2.cs" />
+    <Compile Include="Win32\Win32Api.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PInvoke\PInvoke.csproj">

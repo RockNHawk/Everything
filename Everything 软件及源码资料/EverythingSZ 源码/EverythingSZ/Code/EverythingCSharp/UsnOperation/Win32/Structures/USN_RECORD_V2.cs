@@ -11,7 +11,7 @@ namespace PInvoke.Win32.Structures
     /// Parent File Reference Number(64bits), Reason Code(32bits), File Attributes(32bits),
     /// File Name Length(32bits), the File Name Offset(32bits) and the File Name.
     /// </summary>
-    public class USN_RECORD_V2
+    public struct USN_RECORD_V2
     {
         private const int FR_OFFSET = 8;
         private const int PFR_OFFSET = 16;
@@ -21,15 +21,15 @@ namespace PInvoke.Win32.Structures
         private const int FNL_OFFSET = 56;
         private const int FN_OFFSET = 58;
 
-        public UInt32 RecordLength { get; private set; }
-        public UInt64 FileReferenceNumber { get; private set; }
-        public UInt64 ParentFileReferenceNumber { get; private set; }
-        public Int64 Usn { get; private set; }
-        public UInt32 Reason { get; private set; }
-        public UInt32 FileAttributes { get; private set; }
-        public Int32 FileNameLength { get; private set; }
-        public Int32 FileNameOffset { get; private set; }
-        public string FileName { get; private set; }
+        public readonly UInt32 RecordLength;
+        public readonly UInt64 FileReferenceNumber;
+        public readonly UInt64 ParentFileReferenceNumber;
+        public readonly Int64 Usn;
+        public readonly UInt32 Reason;
+        public readonly UInt32 FileAttributes;
+        public readonly Int32 FileNameLength;
+        public readonly Int32 FileNameOffset;
+        public readonly string FileName;
 
         /// <summary>
         /// USN Record Constructor

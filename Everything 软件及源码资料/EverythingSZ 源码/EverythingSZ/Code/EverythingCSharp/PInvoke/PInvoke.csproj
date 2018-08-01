@@ -48,17 +48,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Win32\Constants\Win32ApiConstant.cs" />
-    <Compile Include="Win32\Structures\USN_JOURNAL_DATA.cs" />
-    <Compile Include="Win32\Structures\CREATE_USN_JOURNAL_DATA.cs" />
-    <Compile Include="Win32\Structures\MFT_ENUM_DATA.cs" />
-    <Compile Include="Win32\Structures\POINT.cs" />
-    <Compile Include="Win32\Structures\READ_USN_JOURNAL_DATA.cs" />
-    <Compile Include="Win32\Structures\BY_HANDLE_FILE_INFORMATION.cs" />
-    <Compile Include="Win32\Structures\USN_RECORD_V2.cs" />
-    <Compile Include="Win32\Win32Api.cs" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,10 +16,10 @@ namespace UsnOperation
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class UsnEntry
+    public struct UsnEntry
     {
-        public UInt32 RecordLength { get; private set; }
-        public UInt64 FileReferenceNumber { get; private set; }
+        public readonly UInt32 RecordLength;
+        public readonly UInt64 FileReferenceNumber;
 
         /// <summary>
         /// Gets the parent file reference number.
@@ -28,21 +28,24 @@ namespace UsnOperation
         /// <value>
         /// The parent file reference number.
         /// </value>
-        public UInt64 ParentFileReferenceNumber { get; private set; }
-        public Int64 Usn { get; private set; }
-        public UInt32 Reason { get; private set; }
-        public UInt32 FileAttributes { get; private set; }
-        public Int32 FileNameLength { get; private set; }
-        public Int32 FileNameOffset { get; private set; }
-        public string FileName { get; private set; }
-        public bool IsFolder 
-        { 
-            get 
-            {
-                return (this.FileAttributes & Win32ApiConstant.FILE_ATTRIBUTE_DIRECTORY) != 0;
-            } 
-        }
-            
+        public readonly UInt64 ParentFileReferenceNumber;
+        public readonly Int64 Usn;
+        public readonly UInt32 Reason;
+        public readonly UInt32 FileAttributes;
+        public readonly Int32 FileNameLength;
+        public readonly Int32 FileNameOffset;
+        public readonly string FileName;
+
+        public readonly bool IsFolder;
+
+        //public bool IsFolder
+        //{
+        //    get
+        //    {
+        //        return (this.FileAttributes & Win32ApiConstant.FILE_ATTRIBUTE_DIRECTORY) != 0;
+        //    }
+        //}
+
         public UsnEntry(USN_RECORD_V2 usnRecord)
         {
             this.RecordLength = usnRecord.RecordLength;
@@ -54,6 +57,7 @@ namespace UsnOperation
             this.FileNameLength = usnRecord.FileNameLength;
             this.FileNameOffset = usnRecord.FileNameOffset;
             this.FileName = usnRecord.FileName;
+            this.IsFolder = (this.FileAttributes & Win32ApiConstant.FILE_ATTRIBUTE_DIRECTORY) != 0;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace QueryEngine
         /// </summary>
         protected const UInt64 ROOT_FILE_REFERENCE_NUMBER = 0x5000000000005L;
 
-        protected static readonly IEnumerable<string> excludeFolders = 
+        protected static readonly IEnumerable<string> excludeFolders =
             new string[]
             {
                 "$RECYCLE.BIN",
@@ -31,36 +31,27 @@ namespace QueryEngine
                 "$UpCase",
                 "$Volume",
                 "$Extend"
-            }.Select(e=>e.ToUpper());
+            }.Select(e => e.ToUpper());
 
-        public static IEnumerable<DriveInfo> GetAllFixedNtfsDrives(string driver = "")
+        public static IEnumerable<DriveInfo> GetAllFixedNtfsDrives()
         {
             //return DriveInfo.GetDrives()
             //    .Where(d => d.DriveType == DriveType.Fixed && d.DriveFormat.ToUpper() == "NTFS");
             var dirs = DriveInfo.GetDrives();
             //return dirs.Where(d => d.DriveType == DriveType.Removable && d.DriveFormat.ToUpper() == "NTFS");
-            return dirs.Where(d => d.IsReady&& d.Name.ToUpper().Contains(driver.ToUpper()) && d.DriveFormat.ToUpper() == "NTFS");
+            //return dirs.Where(d => d.IsReady&& d.Name.ToUpper().Contains(driver.ToUpper()) && d.DriveFormat.ToUpper() == "NTFS");
+            return dirs.Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS");
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(string driver="")
+        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(string driver = "")
         {
             List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();
 
-            IEnumerable<DriveInfo> fixedNtfsDrives = GetAllFixedNtfsDrives(driver);
+            IEnumerable<DriveInfo> fixedNtfsDrives = GetAllFixedNtfsDrives().FirstOrDefault(x => x.Name.StartsWith(driver));
 
             foreach (var drive in fixedNtfsDrives)
             {
-                var usnOperator = new UsnOperator(drive);
-
-                var usnEntries = usnOperator.GetEntries().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
-                var folders = usnEntries.Where(e => e.IsFolder).ToArray();
-                List<FrnFilePath> paths = GetFolderPath(folders, drive);
-
-                result.AddRange(usnEntries.Join(
-                    paths,
-                    usn => usn.ParentFileReferenceNumber,
-                    path => path.FileReferenceNumber,
-                    (usn, path) => new FileAndDirectoryEntry(usn, path.Path)));
+                result.AddRange(GetAllFilesAndDirectories(drive));
             }
 
             //Console.WriteLine(result.Count);
@@ -79,6 +70,21 @@ namespace QueryEngine
             //    Console.WriteLine((result.Count - i) + "、" + result[result.Count - i].FileName);
             //}
             return result;
+        }
+
+        private static IEnumerable<FileAndDirectoryEntry> GetAllFilesAndDirectories(DriveInfo drive)
+        {
+            var usnOperator = new UsnOperator(drive);
+
+            var usnEntries = usnOperator.GetEntriesEnumerator().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
+            var folders = usnEntries.Where(e => e.IsFolder).ToArray();
+            List<FrnFilePath> paths = GetFolderPath(folders, drive);
+
+            return (usnEntries.Join(
+                paths,
+                usn => usn.ParentFileReferenceNumber,
+                path => path.FileReferenceNumber,
+                (usn, path) => new FileAndDirectoryEntry(usn, path.Path)));
         }
 
         private static List<FrnFilePath> GetFolderPath(UsnEntry[] folders, DriveInfo drive)
@@ -111,7 +117,7 @@ namespace QueryEngine
                     && pathDic.ContainsKey(currentValue.ParentFileReferenceNumber.Value))
                 {
                     FrnFilePath parentValue = pathDic[currentValue.ParentFileReferenceNumber.Value];
-                     
+
                     // 递归将父级文件夹加入到 treeWalkStack 中，方便下一步填充他们的路径
                     while (string.IsNullOrWhiteSpace(parentValue.Path)
                         && parentValue.ParentFileReferenceNumber.HasValue

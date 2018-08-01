@@ -91,7 +91,7 @@ namespace UsnOperation
             return isSuccess;
         }
 
-        public List<UsnEntry> GetEntries()
+        public IEnumerator<UsnEntry> GetEntriesEnumerator()
         {
             var result = new List<UsnEntry>();
 
@@ -116,6 +116,15 @@ namespace UsnOperation
 
                 uint outBytesCount;
 
+                try
+                {
+
+                }
+                finally
+                {
+
+                }
+
                 while (false != Win32Api.DeviceIoControl(
                     this.DriveRootHandle,
                     UsnControlCode.FSCTL_ENUM_USN_DATA,
@@ -136,19 +145,22 @@ namespace UsnOperation
 
                     IntPtr ptrUsnRecord = new IntPtr(ptrData.ToInt32() + sizeof(Int64));
 
-                    int count = 0;
+                    //int count = 0;
                     //Console.WriteLine("outBytesCount: " + outBytesCount + "");
                     //Console.WriteLine("=======>>");////////
-                    UsnEntry ue = null;
+                    //UsnEntry ue = null;
                     while (outBytesCount > 60)
                     {
                         var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
 
-                        result.Add(ue = new UsnEntry(usnRecord));
+                        //result.Add(usnRecord);
+                        //result.Add(ue = new UsnEntry(usnRecord));
 
                         ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
 
                         outBytesCount -= usnRecord.RecordLength;
+
+                        yield return new UsnEntry(usnRecord);
 
                         //Console.WriteLine(count++ + "、" + ue.Usn + "\t" + usnRecord.FileName);////////
                     }
@@ -161,7 +173,7 @@ namespace UsnOperation
                 Marshal.FreeHGlobal(ptrMftEnumData);
             }
 
-            return result;
+            //return result;
         }
 
         private static IntPtr GetHeapGlobalPtr(int size)
