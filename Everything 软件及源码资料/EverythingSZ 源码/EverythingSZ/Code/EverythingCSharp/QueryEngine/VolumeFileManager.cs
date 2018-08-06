@@ -12,10 +12,14 @@ namespace QueryEngine
         public UsnEntry USN { get; set; }
     }
 
-    class VolumeFileManager
+    public class VolumeFileManager
     {
+        //public VolumeFileManager Instance { get; set; } = new VolumeFileManager();
 
-        private static void Init(DriveInfo drive)
+
+        List<FileEntry> allFiles;
+
+        public void Init(DriveInfo drive)
         {
             // http://irix.me/2016/04/16/NTFS-USN/
 
@@ -52,6 +56,21 @@ namespace QueryEngine
                 }
             }
 
+            for (int i = 0; i < files.Count; i++)
+            {
+                var f = files[i];
+
+                string path = "";
+                var curr = f;
+                while (curr != null)
+                {
+                    path = curr.FileName + "\\" + path;
+                    curr = f.Parent;
+                }
+                f.Path = path;
+            }
+
+            this.allFiles = files;
 
             Console.WriteLine(dic);
 
@@ -78,6 +97,7 @@ namespace QueryEngine
                         dic[entry.FileReferenceNumber] = new Tuple<UsnEntry, FileEntry>(entry, new FileEntry
                         {
                             FileName = entry.FileName,
+                            IsFolder = entry.IsFolder,
                         });
                     }
                 }
