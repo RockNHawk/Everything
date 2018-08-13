@@ -43,16 +43,21 @@ namespace QueryEngine
             return dirs.Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS");
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(string driver = "")
+        public static List<FileAndDirectoryEntry> GetFilesAndDirectories(IEnumerable<DriveInfo> fixedNtfsDrives)
         {
             List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();
-
-            IEnumerable<DriveInfo> fixedNtfsDrives = GetAllFixedNtfsDrives().FirstOrDefault(x => x.Name.StartsWith(driver));
-
             foreach (var drive in fixedNtfsDrives)
             {
-                result.AddRange(GetAllFilesAndDirectories(drive));
+                result.AddRange(GetFilesAndDirectories(drive));
             }
+            return result;
+        }
+
+        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(string driver = "")
+        {
+            var fixedNtfsDrive = GetAllFixedNtfsDrives().FirstOrDefault(x => x.Name.StartsWith(driver));
+
+            return GetFilesAndDirectories(fixedNtfsDrive);
 
             //Console.WriteLine(result.Count);
             //Console.WriteLine("==========");
@@ -69,25 +74,44 @@ namespace QueryEngine
             //{
             //    Console.WriteLine((result.Count - i) + "、" + result[result.Count - i].FileName);
             //}
-            return result;
+            //return result;
         }
 
-        private static IEnumerable<FileAndDirectoryEntry> GetAllFilesAndDirectories(DriveInfo drive)
+        private static List<FileAndDirectoryEntry> GetFilesAndDirectories(DriveInfo drive)
         {
             var usnOperator = new UsnOperator(drive);
 
-            var usnEntries = usnOperator.GetEntriesEnumerator().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
-            var folders = usnEntries.Where(e => e.IsFolder).ToArray();
+            var usnEntries = new List<UsnEntry>();
+            var folders = new List<UsnEntry>();
+            using (var itr = usnOperator.GetEntriesEnumerator())
+            {
+                while (itr.MoveNext())
+                {
+                    var e = itr.Current;
+                    if (excludeFolders.Contains(e.FileName.ToUpper()))
+                    {
+                        continue;
+                    }
+                    usnEntries.Add(e);
+                    if (e.IsFolder)
+                    {
+                        folders.Add(e);
+                    }
+                }
+            }
+
+            //var usnEntries = usnOperator.GetEntriesEnumerator().Where(e => !excludeFolders.Contains(e.FileName.ToUpper()));
+            //var folders = usnEntries.Where(e => e.IsFolder).ToArray();
             List<FrnFilePath> paths = GetFolderPath(folders, drive);
 
             return (usnEntries.Join(
                 paths,
                 usn => usn.ParentFileReferenceNumber,
                 path => path.FileReferenceNumber,
-                (usn, path) => new FileAndDirectoryEntry(usn, path.Path)));
+                (usn, path) => new FileAndDirectoryEntry(usn, path.Path))).ToList();
         }
 
-        private static List<FrnFilePath> GetFolderPath(UsnEntry[] folders, DriveInfo drive)
+        private static List<FrnFilePath> GetFolderPath(IList<UsnEntry> folders, DriveInfo drive)
         {
             Dictionary<UInt64, FrnFilePath> pathDic = new Dictionary<ulong, FrnFilePath>();
 

@@ -12,3 +12,17 @@ I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\WinFormUI\bi
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\PInvoke.pdb
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.exe
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\WinFormUI.exe
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\WinFormUI.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\QueryEngine.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\UsnOperation.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\QueryEngine.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\bin\Debug\UsnOperation.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.csprojAssemblyReference.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.MainForm.resources
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.Properties.Resources.resources
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.csproj.GenerateResource.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.csproj.CoreCompileInputs.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.csproj.CopyComplete
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.exe
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\WinFormUI\obj\x86\Debug\WinFormUI.pdb

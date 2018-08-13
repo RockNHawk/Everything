@@ -7,3 +7,12 @@ I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\QueryEngine\
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.csprojResolveAssemblyReference.cache
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.dll
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.csprojAssemblyReference.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.csproj.CoreCompileInputs.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\bin\Debug\QueryEngine.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\bin\Debug\QueryEngine.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\bin\Debug\UsnOperation.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\bin\Debug\UsnOperation.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\QueryEngine\obj\Debug\QueryEngine.csproj.CopyComplete

@@ -65,7 +65,7 @@ namespace QueryEngine
                 while (curr != null)
                 {
                     path = curr.FileName + "\\" + path;
-                    curr = f.Parent;
+                    curr = curr.Parent;
                 }
                 f.Path = path;
             }

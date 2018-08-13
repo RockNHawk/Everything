@@ -5,3 +5,13 @@ I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\UsnOperation
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.csprojResolveAssemblyReference.cache
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.dll
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\bin\Debug\UsnOperation.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\bin\Debug\UsnOperation.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\bin\Debug\PInvoke.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\bin\Debug\PInvoke.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\bin\Debug\PInvoke.dll.config
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.csprojAssemblyReference.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.csproj.CoreCompileInputs.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.csproj.CopyComplete
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\UsnOperation\obj\Debug\UsnOperation.pdb

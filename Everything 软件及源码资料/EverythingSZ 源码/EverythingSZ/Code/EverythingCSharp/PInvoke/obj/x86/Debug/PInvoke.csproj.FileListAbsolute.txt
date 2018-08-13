@@ -3,3 +3,10 @@ I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\PInvoke\bin\
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\PInvoke\bin\Debug\PInvoke.pdb
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.dll
 I:\CoCo\Third\everythingsz-22853\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\bin\Debug\PInvoke.dll.config
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\bin\Debug\PInvoke.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\bin\Debug\PInvoke.pdb
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.csprojAssemblyReference.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.csproj.CoreCompileInputs.cache
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.dll
+K:\code\SearchEngine\Everything group\EverythingSZ-Study\Everything 软件及源码资料\EverythingSZ 源码\EverythingSZ\Code\EverythingCSharp\PInvoke\obj\x86\Debug\PInvoke.pdb
