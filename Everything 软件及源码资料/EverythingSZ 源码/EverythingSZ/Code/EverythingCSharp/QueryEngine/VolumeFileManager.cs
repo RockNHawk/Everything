@@ -34,18 +34,18 @@ namespace QueryEngine
             {
                 var usn = item.Value.Item1;
                 var file = item.Value.Item2;
-                var ParentFileReferenceNumber = usn.ParentFileReferenceNumber;
-                if (ParentFileReferenceNumber == 0U)
+                var parentFileReferenceNumber = usn.ParentFileReferenceNumber;
+                if (parentFileReferenceNumber == 0U)
                 {
 
                 }
-                else if (ParentFileReferenceNumber == 0x5000000000005U)
+                else if (parentFileReferenceNumber == 0x5000000000005U)
                 {
 
                 }
                 else
                 {
-                    if (dic.TryGetValue(ParentFileReferenceNumber, out var parent))
+                    if (dic.TryGetValue(parentFileReferenceNumber, out var parent))
                     {
                         file.Parent = parent.Item2;
                     }
@@ -60,12 +60,12 @@ namespace QueryEngine
             {
                 var f = files[i];
 
-                string path = "";
-                var curr = f;
-                while (curr != null)
+                string path = f.FileName;
+                var parent = f.Parent;
+                while (parent != null)
                 {
-                    path = curr.FileName + "\\" + path;
-                    curr = curr.Parent;
+                    path = parent.FileName + "\\" + path;
+                    parent = parent.Parent;
                 }
                 f.Path = path;
             }

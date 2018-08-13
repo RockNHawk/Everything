@@ -192,3 +192,11 @@ ModelManifest.xml
 vs
 .vs
 v15
+
+
+
+
+*.dll
+*.pdb
+
+

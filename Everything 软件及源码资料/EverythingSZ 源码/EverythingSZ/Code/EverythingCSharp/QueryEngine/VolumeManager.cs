@@ -8,7 +8,8 @@ namespace QueryEngine
 {
     public class VolumeManager
     {
-       
+        public VolumeManager Instance { get; set; } = new VolumeManager();
+
         public void Init() {
             var drives = DriveInfo.GetDrives();
 
