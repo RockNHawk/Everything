@@ -16,16 +16,18 @@ namespace USNJournalConsole
 
             watch.Start();
 
-            var allFiles = Engine.GetAllFilesAndDirectories("d");
+            var allFiles = Engine.GetAllFilesAndDirectories();
             watch.Stop();
 
             Console.WriteLine("{0} files, {1} seconds", allFiles.Count(), watch.Elapsed.TotalSeconds);
-            watch.Restart();
-            var aaa = GetV(@"d:\");
-            watch.Stop();
-            File.WriteAllText(@"1.txt", string.Join(Environment.NewLine, aaa));
-            File.WriteAllText(@"2.txt", string.Join(Environment.NewLine, allFiles.Select(e=>e.FullFileName)));
-            Console.WriteLine("{0} files, {1} seconds", aaa.Count(), watch.Elapsed.TotalSeconds);
+          
+            //watch.Restart();
+            //var aaa = GetV(@"d:\");
+            //watch.Stop();
+            //File.WriteAllText(@"1.txt", string.Join(Environment.NewLine, aaa));
+            //File.WriteAllText(@"2.txt", string.Join(Environment.NewLine, allFiles.Select(e=>e.FullFileName)));
+            //Console.WriteLine("{0} files, {1} seconds", aaa.Count(), watch.Elapsed.TotalSeconds);
+
             Console.Write("Press any key to continue . . . ");
             Console.ReadKey(true);
         }

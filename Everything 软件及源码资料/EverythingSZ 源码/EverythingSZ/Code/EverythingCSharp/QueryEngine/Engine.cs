@@ -53,9 +53,15 @@ namespace QueryEngine
             return result;
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(string driver = "")
+        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(   )
         {
-            var fixedNtfsDrive = GetAllFixedNtfsDrives().FirstOrDefault(x => x.Name.StartsWith(driver));
+            var fixedNtfsDrive = GetAllFixedNtfsDrives();
+            return GetFilesAndDirectories(fixedNtfsDrive);
+        }
+
+        public static List<FileAndDirectoryEntry> GetFilesAndDirectories(string driverName)
+        {
+            var fixedNtfsDrive = GetAllFixedNtfsDrives().FirstOrDefault(x => string.Compare(x.Name, driverName, StringComparison.OrdinalIgnoreCase) == 0);
 
             return GetFilesAndDirectories(fixedNtfsDrive);
 
@@ -77,7 +83,7 @@ namespace QueryEngine
             //return result;
         }
 
-        private static List<FileAndDirectoryEntry> GetFilesAndDirectories(DriveInfo drive)
+        public static List<FileAndDirectoryEntry> GetFilesAndDirectories(DriveInfo drive)
         {
             var usnOperator = new UsnOperator(drive);
 
