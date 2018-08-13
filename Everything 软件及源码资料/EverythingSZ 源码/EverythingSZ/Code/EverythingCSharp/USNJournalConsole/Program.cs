@@ -16,6 +16,14 @@ namespace USNJournalConsole
 
             watch.Start();
 
+
+            /*
+new code
+1184025 files, 11.4229784 seconds
+
+old code
+1184037 files, 14.6285 seconds
+             */
             var allFiles = Engine.GetAllFilesAndDirectories();
             watch.Stop();
 
