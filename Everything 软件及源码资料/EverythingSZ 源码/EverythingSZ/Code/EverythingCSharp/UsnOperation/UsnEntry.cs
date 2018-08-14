@@ -18,8 +18,8 @@ namespace UsnOperation
     /// </summary>
     public struct UsnEntry
     {
-        public readonly UInt32 RecordLength;
-        public readonly UInt64 FileReferenceNumber;
+        public UInt32 RecordLength;
+        public UInt64 FileReferenceNumber;
 
         /// <summary>
         /// Gets the parent file reference number.
@@ -28,15 +28,15 @@ namespace UsnOperation
         /// <value>
         /// The parent file reference number.
         /// </value>
-        public readonly UInt64 ParentFileReferenceNumber;
-        public readonly Int64 Usn;
-        public readonly UInt32 Reason;
-        public readonly UInt32 FileAttributes;
-        public readonly Int32 FileNameLength;
-        public readonly Int32 FileNameOffset;
-        public readonly string FileName;
+        public UInt64 ParentFileReferenceNumber;
+        public Int64 Usn;
+        public UInt32 Reason;
+        public UInt32 FileAttributes;
+        public Int32 FileNameLength;
+        public Int32 FileNameOffset;
+        public string FileName;
 
-        public readonly bool IsFolder;
+        public bool IsFolder;
 
         //public bool IsFolder
         //{
@@ -59,5 +59,21 @@ namespace UsnOperation
             this.FileName = usnRecord.FileName;
             this.IsFolder = (this.FileAttributes & Win32ApiConstant.FILE_ATTRIBUTE_DIRECTORY) != 0;
         }
+
+        //public UsnEntry(
+        //    UInt32 RecordLength，
+        //    UInt64 FileReferenceNumber，
+        //    UInt64 ParentFileReferenceNumber，
+        //    Int64 Usn，
+        //    UInt32 Reason，
+        //    UInt32 FileAttributes，
+        //    Int16 FileNameLength，
+        //    Int16 FileNameOffset，
+        //    string FileName
+        //    )
+        //{
+
+        //}
+
     }
 }

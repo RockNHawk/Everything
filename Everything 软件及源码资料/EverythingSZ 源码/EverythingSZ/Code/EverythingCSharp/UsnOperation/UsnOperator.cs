@@ -93,7 +93,7 @@ namespace UsnOperation
 
         public IEnumerator<UsnEntry> GetEntriesEnumerator()
         {
-            var result = new List<UsnEntry>();
+            //var result = new List<UsnEntry>();
 
             UsnErrorCode usnErrorCode = this.QueryUSNJournal();
 
@@ -115,15 +115,6 @@ namespace UsnOperation
                 IntPtr ptrData = GetHeapGlobalPtr(ptrDataSize);
 
                 uint outBytesCount;
-
-                try
-                {
-
-                }
-                finally
-                {
-
-                }
 
                 while (false != Win32Api.DeviceIoControl(
                     this.DriveRootHandle,
@@ -149,18 +140,32 @@ namespace UsnOperation
                     //Console.WriteLine("outBytesCount: " + outBytesCount + "");
                     //Console.WriteLine("=======>>");////////
                     //UsnEntry ue = null;
-                    while (outBytesCount > 60)
+                    while (outBytesCount > 60u)
                     {
-                        var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
+                        //var usnRecord = new USN_RECORD_V2(ptrUsnRecord);
+                        //ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
+                        //outBytesCount -= (UInt32)usnRecord.RecordLength;
+                        //yield return new UsnEntry(usnRecord);
 
                         //result.Add(usnRecord);
                         //result.Add(ue = new UsnEntry(usnRecord));
 
-                        ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + usnRecord.RecordLength);
+                        var currUsnRecordPtr = ptrUsnRecord;
+                        var recordLength = Marshal.ReadInt32(currUsnRecordPtr);
+                        ptrUsnRecord = new IntPtr(currUsnRecordPtr.ToInt32() + recordLength);
+                        outBytesCount -= (UInt32)recordLength;
+                        yield return UsnEntryFactory.Create(currUsnRecordPtr);
 
-                        outBytesCount -= usnRecord.RecordLength;
+                        //  var recordLength = Marshal.ReadInt32(ptrUsnRecord);
+                        //  outBytesCount -= (UInt32)recordLength;
+                        //var e= UsnEntryFactory.Create(ptrUsnRecord);
+                        //  ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + recordLength);
+                        //yield  return e;
 
-                        yield return new UsnEntry(usnRecord);
+                        //var recordLength = Marshal.ReadInt32(ptrUsnRecord);
+                        //outBytesCount -= (UInt32)recordLength;
+                        //yield return UsnEntryFactory.Create(ptrUsnRecord);
+                        //ptrUsnRecord = new IntPtr(ptrUsnRecord.ToInt32() + recordLength);
 
                         //Console.WriteLine(count++ + "、" + ue.Usn + "\t" + usnRecord.FileName);////////
                     }

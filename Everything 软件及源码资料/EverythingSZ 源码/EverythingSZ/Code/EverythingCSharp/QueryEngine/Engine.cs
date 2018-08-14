@@ -53,7 +53,7 @@ namespace QueryEngine
             return result;
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories(   )
+        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories()
         {
             var fixedNtfsDrive = GetAllFixedNtfsDrives();
             return GetFilesAndDirectories(fixedNtfsDrive);
@@ -87,8 +87,15 @@ namespace QueryEngine
         {
             var usnOperator = new UsnOperator(drive);
 
-            var usnEntries = new List<UsnEntry>();
-            var folders = new List<UsnEntry>();
+
+            //var entryCount = 0;
+            //using (var itr = usnOperator.GetEntriesEnumerator())
+            //{
+            //    entryCount++;
+            //}
+
+            var usnEntries = new List<UsnEntry>(10000);
+            var folders = new List<UsnEntry>(1000);
             using (var itr = usnOperator.GetEntriesEnumerator())
             {
                 while (itr.MoveNext())

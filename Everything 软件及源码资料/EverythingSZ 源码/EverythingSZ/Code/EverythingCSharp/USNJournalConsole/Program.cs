@@ -14,21 +14,47 @@ namespace USNJournalConsole
         {
             Stopwatch watch = new Stopwatch();
 
+
             watch.Start();
-
-
-            /*
-new code
-1184025 files, 11.4229784 seconds
-
-old code
-1184037 files, 14.6285 seconds
-             */
-            var allFiles = Engine.GetAllFilesAndDirectories();
             watch.Stop();
 
-            Console.WriteLine("{0} files, {1} seconds", allFiles.Count(), watch.Elapsed.TotalSeconds);
-          
+            double time = 0d;
+
+            for (int i = 0; i < 10; i++)
+            {
+                watch.Restart();
+
+                /*
+    new code
+    1184025 files, 11.4229784 seconds
+
+    old code
+    1184037 files, 14.6285 seconds
+                 */
+                var allFiles = Engine.GetAllFilesAndDirectories();
+                watch.Stop();
+
+                var nowt = watch.Elapsed.TotalSeconds;
+                time += nowt;
+                Console.WriteLine("{0} files, {1} seconds", allFiles.Count(), nowt);
+            }
+
+            Console.WriteLine("Avg {0} seconds", time / 10);
+
+            //var drives = DriveInfo.GetDrives();
+            //foreach (var item in drives)
+            //{
+
+            //watch.Restart();
+            //    //new System.IO.DirectoryInfo(item).Attributes.;
+
+
+            //Console.WriteLine("drive {0} files, {1} seconds", allFiles.Count(), watch.Elapsed.TotalSeconds);
+            //watch.Stop();
+            //}
+
+
+
             //watch.Restart();
             //var aaa = GetV(@"d:\");
             //watch.Stop();
