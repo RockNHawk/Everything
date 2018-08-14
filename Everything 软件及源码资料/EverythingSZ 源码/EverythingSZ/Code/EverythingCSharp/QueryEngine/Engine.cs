@@ -72,7 +72,7 @@ namespace QueryEngine
                     }
                 }
             }
-            var list = new List<FileAndDirectoryEntry>();
+            var list = new List<FileAndDirectoryEntry>(count);
             for (int i = 0; i < psResults.Length; i++)
             {
                 var arr1 = psResults[i];

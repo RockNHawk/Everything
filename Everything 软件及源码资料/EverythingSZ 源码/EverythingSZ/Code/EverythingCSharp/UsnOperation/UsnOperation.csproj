@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TaskUtility.cs" />
+    <Compile Include="Rhythm.Threading.Tasks\ParallelUtility.cs" />
+    <Compile Include="Rhythm.Threading.Tasks\TaskUtility.cs" />
     <Compile Include="UsnControlCode.cs" />
     <Compile Include="UsnEntry.cs" />
     <Compile Include="UsnEntryFactory.cs" />
