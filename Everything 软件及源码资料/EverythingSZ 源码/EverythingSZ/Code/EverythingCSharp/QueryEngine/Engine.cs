@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using UsnOperation;
+using Rhythm.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace QueryEngine
 {
@@ -33,24 +35,76 @@ namespace QueryEngine
                 "$Extend"
             }.Select(e => e.ToUpper());
 
-        public static IEnumerable<DriveInfo> GetAllFixedNtfsDrives()
+        public static List<DriveInfo> GetAllFixedNtfsDrives()
         {
             //return DriveInfo.GetDrives()
             //    .Where(d => d.DriveType == DriveType.Fixed && d.DriveFormat.ToUpper() == "NTFS");
             var dirs = DriveInfo.GetDrives();
             //return dirs.Where(d => d.DriveType == DriveType.Removable && d.DriveFormat.ToUpper() == "NTFS");
             //return dirs.Where(d => d.IsReady&& d.Name.ToUpper().Contains(driver.ToUpper()) && d.DriveFormat.ToUpper() == "NTFS");
-            return dirs.Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS");
+            return dirs.Where(d => d.IsReady && d.DriveFormat.ToUpper() == "NTFS").ToList();
         }
 
-        public static List<FileAndDirectoryEntry> GetFilesAndDirectories(IEnumerable<DriveInfo> fixedNtfsDrives)
+        public static List<FileAndDirectoryEntry> GetFilesAndDirectories(IList<DriveInfo> fixedNtfsDrives)
         {
-            List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();
-            foreach (var drive in fixedNtfsDrives)
+            //var ps = TaskUtility.GetPartitions(fixedNtfsDrives);
+            //Parallel.For(0, ps.Count, (i) =>
+            //{
+            //    var list = GetFilesAndDirectories(ps[i]);
+            //})
+
+            var ps = TaskUtility.GetPartitions(fixedNtfsDrives);
+            var psResults = ParallelUtility.PartitionerExecute(fixedNtfsDrives, (drive, i) =>
             {
-                result.AddRange(GetFilesAndDirectories(drive));
+                var r = GetFilesAndDirectories(drive);
+                return r;
+            }, ps);
+            var count = 0;
+            for (int i = 0; i < psResults.Length; i++)
+            {
+                var rs = psResults[i];
+                if (rs != null)
+                {
+                    for (int j = 0; j < rs.Length; j++)
+                    {
+                        var arr2 = rs[j];
+                        count += arr2 == null ? 0 : arr2.Count;
+                    }
+                }
             }
-            return result;
+            var list = new List<FileAndDirectoryEntry>();
+            for (int i = 0; i < psResults.Length; i++)
+            {
+                var arr1 = psResults[i];
+                if (arr1 != null)
+                {
+                    for (int j = 0; j < arr1.Length; j++)
+                    {
+                        var arr2 = arr1[j];
+                        if (arr2 != null)
+                        {
+                            list.AddRange(arr2);
+                        }
+                    }
+                }
+            }
+
+            return list;
+
+            //var r = await TaskUtility.PartitionerExecuteAsync(fixedNtfsDrives, (drive, i) =>
+            //{
+            //    var list = GetFilesAndDirectories(drive);
+            //    return System.Threading.Tasks.Task.FromResult(list);
+            //});
+            //return r.SelectMany(x => x.Result).ToList();
+
+            //List<FileAndDirectoryEntry> result = new List<FileAndDirectoryEntry>();
+            //foreach (var drive in fixedNtfsDrives)
+            //{
+            //    result.AddRange(GetFilesAndDirectories(drive));
+            //}
+            //return result;
+
         }
 
         public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories()

@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using QueryEngine;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace USNJournalConsole
 {
@@ -31,6 +32,7 @@ namespace USNJournalConsole
     old code
     1184037 files, 14.6285 seconds
                  */
+                //var allFiles = Task.Run(() => Engine.GetAllFilesAndDirectories()).Result;
                 var allFiles = Engine.GetAllFilesAndDirectories();
                 watch.Stop();
 

@@ -10,6 +10,7 @@ using QueryEngine;
 using System.Threading;
 using System.IO;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace WinFormUI
 {
@@ -75,7 +76,8 @@ namespace WinFormUI
         {
             statusLabel.Text = "Getting files information";
 
-            this.entries = Engine.GetAllFilesAndDirectories();
+            this.entries = Task.Run(() => Engine.GetAllFilesAndDirectories()).Result;
+            //Engine.GetAllFilesAndDirectories().Result;
             this.allFilesCount = entries.Count();
 
             statusLabel.Text = "Ready";
