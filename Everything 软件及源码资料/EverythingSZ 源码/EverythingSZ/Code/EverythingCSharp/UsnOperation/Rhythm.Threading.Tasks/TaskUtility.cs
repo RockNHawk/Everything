@@ -10,68 +10,55 @@ namespace Rhythm.Threading.Tasks
 {
     public class TaskUtility
     {
-        public static List<TResult> PartitionerExecuteSync<TItem, TResult>(IEnumerable<TItem> items,
-         Func<TItem, int, TResult> func, int? partitionCount = null)
+        public static async Task<Task<TResult>[]> PartitionerExecuteAsync<TItem, TResult>(IEnumerable<TItem> items,
+            Func<TItem, int, Task<TResult>> func, int? partitionCount = null)
         {
             var ps = GetPartitions(items, partitionCount);
-            var psResults = PartitionerExecuteSync(items, func, ps);
-            var count = 0;
-            for (int i = 0; i < psResults.Length; i++)
-            {
-                var rs = psResults[i];
-                count += rs == null ? 0 : rs.Length;
-            }
-            var results = new List<TResult>(count);
-            for (int i = 0; i < psResults.Length; i++)
-            {
-                var rs = psResults[i];
-                if (rs != null)
-                {
-                    results.AddRange(rs);
-                }
-            }
-            return results;
+            return await PartitionerExecuteAsync(items, func, ps);
         }
 
-        public static TResult[][] PartitionerExecuteSync<TItem, TResult>(IEnumerable<TItem> items,
-            Func<TItem, int, TResult> func, IList<IEnumerator<TItem>> ps)
+
+        private static async Task<Task<TResult>[]> PartitionerExecuteAsync<TItem, TResult>(IEnumerable<TItem> items,
+            Func<TItem, int, Task<TResult>> func, IList<IEnumerator<TItem>> ps)
         {
-            var results = new TResult[ps.Count][];
+            var tasks = new Task<Task<TResult>[]>[ps.Count];
             var psItemCount = items.Count() / ps.Count;
             //Console.WriteLine($"GetPartitions Count {ps.Count}");
-            Parallel.For(0, ps.Count, k =>
+            for (var k = 0; k < ps.Count; k++)
             {
                 var psfies = ps[k];
-                results[k] = ExecuteSync(func, psfies, k, psItemCount);
-            });
-            //for (var k = 0; k < ps.Count; k++)
-            //{
-            //    var psfies = ps[k];
-            //    results[k] = ExecuteSync(func, psfies, k, psItemCount);
-            //}
-            return results;
+                tasks[k] = ExecuteAsync(func, psfies, k, psItemCount);
+            }
+            var s = (await Task.WhenAll(tasks));
+            return s.SelectMany(x => x).ToArray();
         }
 
-        private static TResult[] ExecuteSync<TItem, TResult>(Func<TItem, int, TResult> func,
+        private static async Task<Task<TResult>[]> ExecuteAsync<TItem, TResult>(Func<TItem, int, Task<TResult>> func,
             IEnumerator<TItem> psfies, int index, int? psItemCount)
         {
-            var results = psItemCount.HasValue ? new List<TResult>(psItemCount.Value) : new List<TResult>();
+            var tasks = psItemCount.HasValue ? new List<Task<TResult>>(psItemCount.Value) : new List<Task<TResult>>();
             using (psfies)
             {
                 while (psfies.MoveNext())
                 {
                     var f = psfies.Current;
-                    // TODO:Exception handling
                     var t = func.Invoke(f, index);
-                    results.Add(t);
+                    tasks.Add(t);
+                    try
+                    {
+                        await t;
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
-            return results.ToArray();
+            return tasks.ToArray();
         }
 
 
         public static IList<IEnumerator<TItem>> GetPartitions<TItem>(IEnumerable<TItem> items,
-      int? partitionCount = null)
+            int? partitionCount = null)
         {
             var ps = Partitioner.Create(items).GetPartitions(partitionCount ?? System.Environment.ProcessorCount);
             return ps;

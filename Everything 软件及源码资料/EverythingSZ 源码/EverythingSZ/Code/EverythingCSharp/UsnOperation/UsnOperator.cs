@@ -35,6 +35,7 @@ namespace UsnOperation
             get;
             private set;
         }
+        public int EstimatedEntryCount { get => estimatedEntryCount; set => estimatedEntryCount = value; }
 
         public UsnOperator(DriveInfo drive)
         {
@@ -91,11 +92,21 @@ namespace UsnOperation
             return isSuccess;
         }
 
+        UsnErrorCode? usnErrorCode;
+        public int Prepare()
+        {
+            this.usnErrorCode = this.QueryUSNJournal();
+
+            return this.estimatedEntryCount;
+        }
+
         public IEnumerator<UsnEntry> GetEntriesEnumerator()
         {
-            //var result = new List<UsnEntry>();
-
-            UsnErrorCode usnErrorCode = this.QueryUSNJournal();
+            if (usnErrorCode == null)
+            {
+                Prepare();
+            }
+            //UsnErrorCode usnErrorCode = this.QueryUSNJournal();
 
             if (usnErrorCode == UsnErrorCode.SUCCESS)
             {
@@ -189,6 +200,9 @@ namespace UsnOperation
             return buffer;
         }
 
+
+        internal int estimatedEntryCount;
+
         private UsnErrorCode QueryUSNJournal()
         {
             int sizeUsnJournalData = Marshal.SizeOf(this.ntfsUsnJournalData);
@@ -208,6 +222,15 @@ namespace UsnOperation
                 IntPtr.Zero);
 
             this.ntfsUsnJournalData = tempUsnJournalData;
+
+            this.estimatedEntryCount = (int)(tempUsnJournalData.NextUsn / 1000L);
+
+            //Console.WriteLine($"Drive:{DriveLetter},\n AllocationDelta:{tempUsnJournalData.AllocationDelta},\n MaximumSize:{tempUsnJournalData.MaximumSize},\n FirstUsn:{tempUsnJournalData.FirstUsn},\n NextUsn:{tempUsnJournalData.NextUsn},\n LowestValidUsn:{tempUsnJournalData.LowestValidUsn},\n MaxUsn:{tempUsnJournalData.MaxUsn},\n UsnJournalID:{tempUsnJournalData.UsnJournalID}");
+
+
+            //Console.WriteLine($"Drive:{DriveLetter}, NextUsn:{tempUsnJournalData.NextUsn}");
+            //Console.WriteLine($"Drive:{DriveLetter}, MaximumSize:{tempUsnJournalData.MaximumSize}");
+
 
             //if (isSuccess)
             //{

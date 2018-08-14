@@ -21,7 +21,7 @@ namespace USNJournalConsole
 
             double time = 0d;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 watch.Restart();
 
@@ -32,8 +32,8 @@ namespace USNJournalConsole
     old code
     1184037 files, 14.6285 seconds
                  */
-                //var allFiles = Task.Run(() => Engine.GetAllFilesAndDirectories()).Result;
-                var allFiles = Engine.GetAllFilesAndDirectories();
+                var allFiles = Task.Run(() => Engine.GetAllFilesAndDirectories()).Result;
+                //var allFiles = Engine.GetAllFilesAndDirectories();
                 watch.Stop();
 
                 var nowt = watch.Elapsed.TotalSeconds;

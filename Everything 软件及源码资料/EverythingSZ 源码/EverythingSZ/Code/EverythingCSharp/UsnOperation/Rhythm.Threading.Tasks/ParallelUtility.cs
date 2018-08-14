@@ -10,7 +10,7 @@ namespace Rhythm.Threading.Tasks
 {
     public class ParallelUtility
     {
-        public static List<TResult> PartitionerExecuteSync<TItem, TResult>(IEnumerable<TItem> items,
+        public static List<TResult> PartitionerExecute<TItem, TResult>(IEnumerable<TItem> items,
          Func<TItem, int, TResult> func, int? partitionCount = null)
         {
             var ps = TaskUtility.GetPartitions(items, partitionCount);

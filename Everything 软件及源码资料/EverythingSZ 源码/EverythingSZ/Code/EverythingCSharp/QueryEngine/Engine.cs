@@ -107,10 +107,26 @@ namespace QueryEngine
 
         }
 
-        public static List<FileAndDirectoryEntry> GetAllFilesAndDirectories()
+        public static async Task<List<FileEntry>> GetAllFilesAndDirectories()
         {
-            var fixedNtfsDrive = GetAllFixedNtfsDrives();
-            return GetFilesAndDirectories(fixedNtfsDrive);
+            await VolumeManager.Instance.Init();
+            var mgrs = VolumeManager.Instance.mgrs;
+
+            var entryCount = 0;
+            foreach (var item in mgrs)
+            {
+                entryCount += item.Value.entryCount;
+            }
+
+            var entries = new List<FileEntry>(entryCount);
+            foreach (var item in mgrs)
+            {
+                entries.AddRange(item.Value.entries);
+            }
+
+            return entries;
+            //var fixedNtfsDrive = GetAllFixedNtfsDrives();
+            //return GetFilesAndDirectories(fixedNtfsDrive);
         }
 
         public static List<FileAndDirectoryEntry> GetFilesAndDirectories(string driverName)
