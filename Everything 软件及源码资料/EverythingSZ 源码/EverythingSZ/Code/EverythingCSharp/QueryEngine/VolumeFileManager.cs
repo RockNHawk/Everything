@@ -107,8 +107,7 @@ namespace QueryEngine
         /// <returns></returns>
         private static Dictionary<ulong, Tuple<UsnEntry, FileEntry>> GetFilesDic(DriveInfo drive, int cap, out int fileCount, out int directoryCount)
         {
-            fileCount = 0; directoryCount = 0;
-
+            int fc = 0, dc = 0;
             using (var usnOperator = new UsnOperator(drive))
             {
                 usnOperator.Prepare();
@@ -126,13 +125,15 @@ namespace QueryEngine
                         });
                         if (entry.IsFolder)
                         {
-                            directoryCount++;
+                            dc++;
                         }
                         else
                         {
-                            fileCount++;
+                            fc++;
                         }
                     }
+                    fileCount = fc;
+                    directoryCount = dc;
                     return dic;
                 }
             }
