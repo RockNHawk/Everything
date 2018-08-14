@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileEntry.cs" />
+    <Compile Include="Rhythm.Threading.Tasks\ParallelUtility.cs" />
+    <Compile Include="Rhythm.Threading.Tasks\TaskUtility.cs" />
     <Compile Include="VolumeFileManager.cs" />
     <Compile Include="VolumeManager.cs" />
     <Compile Include="FileAndDirectoryEntry.cs" />

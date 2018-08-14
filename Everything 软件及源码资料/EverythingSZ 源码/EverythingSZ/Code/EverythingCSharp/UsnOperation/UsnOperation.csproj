@@ -41,15 +41,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Rhythm.Threading.Tasks\ParallelUtility.cs" />
-    <Compile Include="Rhythm.Threading.Tasks\TaskUtility.cs" />
     <Compile Include="UsnControlCode.cs" />
     <Compile Include="UsnEntry.cs" />
     <Compile Include="UsnEntryFactory.cs" />
@@ -67,12 +60,6 @@
     <Compile Include="Win32\Structures\USN_JOURNAL_DATA.cs" />
     <Compile Include="Win32\Structures\USN_RECORD_V2.cs" />
     <Compile Include="Win32\Win32Api.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PInvoke\PInvoke.csproj">
-      <Project>{8E01B2CA-1B49-48D7-803B-71F1223EEF72}</Project>
-      <Name>PInvoke</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

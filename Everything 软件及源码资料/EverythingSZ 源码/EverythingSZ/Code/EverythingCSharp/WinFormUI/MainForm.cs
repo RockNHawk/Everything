@@ -24,8 +24,8 @@ namespace WinFormUI
 
         public MainForm()
         {
-
-            new VolumeManager().Init();
+            //VolumeManager.Instance.Init
+            //new VolumeManager().Init();
 
             this.entries = null;
             this.allFilesCount = 0;
